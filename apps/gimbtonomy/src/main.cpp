@@ -109,8 +109,12 @@ void rxCANProcessor() {
           break;
 
         case HWBRIDGE::CANID::GIMBAL_ROLL_POS:
-          rxMsg.getPayload(roll_pos);
-          rollServo.setPosition(roll_pos);
+          bool isRollServoActive = true; //this servo will dictate if the servo is active or not
+          if(isRollServoActive)
+          {
+            rxMsg.getPayload(roll_pos);
+            rollServo.setPosition(roll_pos);
+          }
           break;
 
         case HWBRIDGE::CANID::NEOPIXEL_SET:
